@@ -32,6 +32,13 @@ jobs:
         run: sudo make install install-lib
       - name: Install bash_unit
         run: curl -s https://raw.githubusercontent.com/bash-unit/bash_unit/master/install.sh | bash
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('test/bindings/python/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Set up python binding tests
         run: make .testvenv
       - name: Run tests
@@ -66,6 +73,13 @@ jobs:
         run: |
           sudo mkdir /usr/local/include /usr/local/lib
           sudo make install install-lib
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('test/bindings/python/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Set up python binding tests
         run: make .testvenv
       - name: Run tests
@@ -104,6 +118,13 @@ jobs:
         run: make install install-lib
       - name: Install bash_unit
         run: curl -s https://raw.githubusercontent.com/bash-unit/bash_unit/master/install.sh | bash
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('test/bindings/python/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Set up python binding tests
         run: |
           mkdir -p .testvenv/bin
